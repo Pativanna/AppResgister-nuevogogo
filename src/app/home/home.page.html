@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      AppRegister
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-input label="Usuario" label-placement="floating" fill="solid" placeholder="Ingrese nombre de usuario o email"></ion-input>
+
+  <br />
+  
+  <ion-input label="PassWord" label-placement="floating" fill="outline" placeholder="Ingrese su contraseña"></ion-input>
+</ion-content>
+<ion-button [routerLink]="['/login']">Ingresar</ion-button> 
+<a routerLink="/recuperar">Olvidé mi contraseña</a>
+<ion-content class="ion-padding">
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>App Register </ion-title>
+    <p>todos los derechos reservados</p>
+  </ion-toolbar>
+</ion-footer>
