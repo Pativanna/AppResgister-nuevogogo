@@ -7,16 +7,30 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-input label="Usuario" label-placement="floating" fill="solid" placeholder="Ingrese nombre de usuario o email"></ion-input>
+  <ion-input label="Usuario" label-placement="floating" fill="solid"
+    placeholder="Ingrese nombre de usuario o email"></ion-input>
 
   <br />
-  
+
   <ion-input label="PassWord" label-placement="floating" fill="outline" placeholder="Ingrese su contraseña"></ion-input>
+
+  <ion-button [routerLink]="['/login']">Ingresar</ion-button>
+  <a routerLink="/recuperar">Olvidé mi contraseña</a>
+
+  <ion-list>
+    <ion-item *ngFor="let usuario of myUsuarios">
+      <ion-label>id:{{usuario.id}}</ion-label>
+      <ion-label>usuario:{{usuario.correo}}</ion-label>
+      <ion-label>contraseña:{{usuario.password}}</ion-label>
+      <ion-label>activoBool:{{usuario.id}}</ion-label>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
-<ion-button [routerLink]="['/login']">Ingresar</ion-button> 
-<a routerLink="/recuperar">Olvidé mi contraseña</a>
-<ion-content class="ion-padding">
-</ion-content>
+
+
+
+
 <ion-footer>
   <ion-toolbar>
     <ion-title>App Register </ion-title>
