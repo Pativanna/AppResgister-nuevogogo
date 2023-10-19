@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DjangoapiService } from '../servicios/djangoapi.service';
 
 @Component({
@@ -6,32 +6,42 @@ import { DjangoapiService } from '../servicios/djangoapi.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
   myUsuarios: any;
+  nuevoUsuario: any = {
+    correo: '',
+    password: ''
+  };
 
-  constructor(private api: DjangoapiService) {
-    this.api.getUsuarios().subscribe(
-      (usuarios)=>{
-        console.log(usuarios);
-        this.myUsuarios = usuarios
-      }
-      ,
-      (error)=>{
-        console.log(error);
-      }
-    )
+  constructor(private api: DjangoapiService) {}
+
+  ngOnInit() {
+    this.obtenerUsuarios();
   }
 
-  loadUsuarios(){
+  obtenerUsuarios() {
     this.api.getUsuarios().subscribe(
-      (usuarios)=>{
+      (usuarios) => {
         console.log(usuarios);
+        this.myUsuarios = usuarios;
+      },
+      (error) => {
+        console.error(error);
       }
-      ,
-      (error)=>{
-        console.log(error);
+    );
+  }
+
+  crearNuevoUsuario() {
+    this.api.crearUsuario(this.nuevoUsuario).subscribe(
+      (response) => {
+        console.log('Usuario creado:', response);
+        // Luego de crear el usuario, puedes actualizar la lista de usuarios llamando a obtenerUsuarios()
+        this.obtenerUsuarios();
+      },
+      (error) => {
+        console.error('Error al crear usuario:', error);
       }
-    )
+    );
   }
 }

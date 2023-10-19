@@ -16,4 +16,8 @@ export class DjangoapiService {
     return this.http.get(this.apiURL+'/lista_usuarios').pipe(retry(3));
   }
 
+  crearUsuario(usuarioData: any): Observable<any> {
+    return this.http.post(this.apiURL + '/lista_usuarios', usuarioData);
+  }
+
 }

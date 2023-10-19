@@ -7,12 +7,19 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-input label="Usuario" label-placement="floating" fill="solid"
-    placeholder="Ingrese nombre de usuario o email"></ion-input>
-
-  <br />
-
-  <ion-input label="PassWord" label-placement="floating" fill="outline" placeholder="Ingrese su contraseña"></ion-input>
+  <ion-content padding>
+  
+    <ion-item>
+      <ion-label position="floating">Correo</ion-label>
+      <ion-input [(ngModel)]="nuevoUsuario.correo" type="email"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input [(ngModel)]="nuevoUsuario.password" type="password"></ion-input>
+    </ion-item>
+  
+    <ion-button expand="full" (click)="crearNuevoUsuario()">Crear Usuario</ion-button>
 
   <ion-button [routerLink]="['/login']">Ingresar</ion-button>
   <a routerLink="/recuperar">Olvidé mi contraseña</a>
@@ -22,7 +29,7 @@
       <ion-label>id:{{usuario.id}}</ion-label>
       <ion-label>usuario:{{usuario.correo}}</ion-label>
       <ion-label>contraseña:{{usuario.password}}</ion-label>
-      <ion-label>activoBool:{{usuario.id}}</ion-label>
+      <ion-label>activoBool:{{usuario.activo}}</ion-label>
     </ion-item>
   </ion-list>
 
