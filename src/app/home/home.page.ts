@@ -8,9 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-
-  username: string='';
-  myUsuarios: any;
+  segment: string = 'login';
+  username: string = '';
+  password: string = '';
+  myUsuarios: any[] = [];
   nuevoUsuario: any = {
     correo: '',
     password: ''
