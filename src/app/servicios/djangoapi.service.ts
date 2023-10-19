@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { retry } from 'rxjs/operators';
 
@@ -13,10 +13,20 @@ export class DjangoapiService {
   constructor(private http: HttpClient) { }
 
   getUsuarios(): Observable<any> {
-    return this.http.get(this.apiURL + '/lista_usuarios').pipe(retry(3));
+    return this.http.get(this.apiURL + '/usuarios/').pipe(retry(3));
   }
 
   crearUsuario(usuarioData: any): Observable<any> {
-    return this.http.post(this.apiURL + '/lista_usuarios', usuarioData);
+    return this.http.post(this.apiURL + '/usuarios/', usuarioData);
+  }
+
+  validarCredenciales(username: string, password: string): Observable<any> {
+    const endpoint = `${this.apiURL}/autenticar/`;
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post(endpoint, { username, password }, { headers });
   }
 }
