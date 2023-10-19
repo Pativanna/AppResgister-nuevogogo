@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { HomePage } from './home/home.page';
 import { LoginPage } from './login/login.page';
 import { RecuperarPage } from './recuperar/recuperar.page';
-
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -17,7 +17,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule,),canActivate:[AuthGuard]
   },
   {
     path: 'recuperar',
