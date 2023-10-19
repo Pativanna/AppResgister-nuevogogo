@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DjangoapiService } from '../servicios/djangoapi.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,14 +8,16 @@ import { DjangoapiService } from '../servicios/djangoapi.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-
-  myUsuarios: any;
+  segment: string = 'login';
+  username: string = '';
+  password: string = '';
+  myUsuarios: any[] = [];
   nuevoUsuario: any = {
     correo: '',
     password: ''
-  };
+  }
 
-  constructor(private api: DjangoapiService) {}
+  constructor(private api: DjangoapiService,private router: Router) {}
 
   ngOnInit() {
     this.obtenerUsuarios();
@@ -44,4 +47,15 @@ export class HomePage implements OnInit {
       }
     );
   }
+
+  loginUser(){
+    const navigationExtras = {
+      state:{
+        username: this.username,
+      },
+    };
+    this.router.navigate(['/login'], navigationExtras);
+  }
+
+
 }
