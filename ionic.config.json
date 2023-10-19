@@ -1,7 +1,0 @@
-{
-  "name": "AppResgister",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
