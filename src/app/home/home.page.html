@@ -1,30 +1,43 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>
-      AppRegister
+      Usuarios
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card>
-    <ion-card-content>
-      <form (ngSubmit)="loginUser()">
+  <form (ngSubmit)="loginUser()">
         <ion-item>
           <ion-label position="floating">Nombre de usuario</ion-label>
           <ion-input [(ngModel)]="username" name="username" required></ion-input>
         </ion-item>
-        
-        <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input  type="password"></ion-input>
-        </ion-item>
-        <br />
-        <ion-button expand="full" type="submit">Iniciar Sesión</ion-button>
-      </form>
-    </ion-card-content>
-  </ion-card>
-  <a routerLink="/recuperar">Olvidé mi contraseña</a>
+
+  <ion-item>
+    <ion-label position="floating">Contraseña</ion-label>
+    <ion-input  type="password"></ion-input>
+  </ion-item>
+
+  <ion-button expand="full" type="submit">Ingresar Usuario</ion-button>
+  </form>
+<br/>
+<br/>
+  <h1>CREAR USUARIO</h1>
+
+  <ion-item>
+    <ion-label position="floating">Correo</ion-label>
+    <ion-input [(ngModel)]="nuevoUsuario.correo" type="email"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Contraseña</ion-label>
+    <ion-input [(ngModel)]="nuevoUsuario.password" type="password"></ion-input>
+  </ion-item>
+
+  <ion-button expand="full" (click)="crearNuevoUsuario()">Crear Usuario</ion-button>
+
+
+  
 
   <ion-list>
     <ion-item *ngFor="let usuario of myUsuarios">
@@ -34,15 +47,4 @@
       <ion-label>activoBool:{{usuario.id}}</ion-label>
     </ion-item>
   </ion-list>
-
 </ion-content>
-
-
-
-
-<ion-footer>
-  <ion-toolbar>
-    <ion-title>App Register </ion-title>
-    <p>todos los derechos reservados</p>
-  </ion-toolbar>
-</ion-footer>

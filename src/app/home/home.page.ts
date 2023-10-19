@@ -1,28 +1,50 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DjangoapiService } from '../servicios/djangoapi.service';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
+  username: string='';
   myUsuarios: any;
-  username: string = '';
-  constructor(private api: DjangoapiService,private router: Router) {
+  nuevoUsuario: any = {
+    correo: '',
+    password: ''
+  }
+
+  constructor(private api: DjangoapiService,private router: Router) {}
+
+  ngOnInit() {
+    this.obtenerUsuarios();
+  }
+
+  obtenerUsuarios() {
     this.api.getUsuarios().subscribe(
-      (usuarios)=>{
+      (usuarios) => {
         console.log(usuarios);
-        this.myUsuarios = usuarios
+        this.myUsuarios = usuarios;
+      },
+      (error) => {
+        console.error(error);
       }
-      ,
-      (error)=>{
-        console.log(error);
+    );
+  }
+
+  crearNuevoUsuario() {
+    this.api.crearUsuario(this.nuevoUsuario).subscribe(
+      (response) => {
+        console.log('Usuario creado:', response);
+        // Luego de crear el usuario, puedes actualizar la lista de usuarios llamando a obtenerUsuarios()
+        this.obtenerUsuarios();
+      },
+      (error) => {
+        console.error('Error al crear usuario:', error);
       }
-    )
+    );
   }
 
   loginUser(){
@@ -33,23 +55,6 @@ export class HomePage {
     };
     this.router.navigate(['/login'], navigationExtras);
   }
-    
-
-  ngOnInit(){}
 
 
-
-
-
-  loadUsuarios(){
-    this.api.getUsuarios().subscribe(
-      (usuarios)=>{
-        console.log(usuarios);
-      }
-      ,
-      (error)=>{
-        console.log(error);
-      }
-    )
-  }
 }
